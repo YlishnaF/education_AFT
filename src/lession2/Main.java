@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -15,8 +14,8 @@ public class Main {
         bufferedReader.close();
 
         sortAndPrintWords(map);
-//        printInformationAboutWords(map);
-//        maxAmountOfWordsInFile(map);
+        printInformationAboutWords(map);
+        maxAmountOfWordsInFile(map);
     }
 
     public static Map<String, Integer> createMapWithWords(BufferedReader bufferedReader) throws IOException {
@@ -52,15 +51,12 @@ public class Main {
 
             System.out.println("Число повторений у слова: " + entry.getKey() + " - " + entry.getValue());
         }
-
     }
 
     public static void maxAmountOfWordsInFile(Map<String, Integer> map) {
         int maxValue = Collections.max(map.values());
-        for (Map.Entry entry : map.entrySet()) {
-            if (entry.getValue().equals(maxValue)) {
-                System.out.println("Максимальное число повторений у слова: " + entry.getKey() + ", появляется в количестве: " + maxValue);
-            }
-        }
+        System.out.println("Максимальное число повторений у слов:");
+        map.entrySet().stream().filter(m->m.getValue()==maxValue).forEach(m-> System.out.println(m.getKey()));
+        System.out.println("появляются в количестве: " + maxValue);
     }
 }
