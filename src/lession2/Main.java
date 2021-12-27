@@ -15,8 +15,8 @@ public class Main {
         bufferedReader.close();
 
         sortAndPrintWords(map);
-        printInformationAboutWords(map);
-        maxAmountOfWordsInFile(map);
+//        printInformationAboutWords(map);
+//        maxAmountOfWordsInFile(map);
     }
 
     public static Map<String, Integer> createMapWithWords(BufferedReader bufferedReader) throws IOException {
@@ -43,10 +43,7 @@ public class Main {
 
     public static void sortAndPrintWords(Map<String, Integer> map) {
         System.out.println("Отсортированный список слов:");
-        List<String> list = map.keySet().stream().sorted().collect(Collectors.toList());
-        for (String s : list) {
-            System.out.println(s);
-        }
+        map.keySet().stream().sorted().forEach(System.out::println);
     }
 
     public static void printInformationAboutWords(Map<String, Integer> map) {
