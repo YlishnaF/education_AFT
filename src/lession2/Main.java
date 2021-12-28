@@ -1,14 +1,26 @@
 package lession2;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
 
-        BufferedReader bufferedReader = new BufferedReader(new FileReader(args[0]));
+        Path path = Paths.get(args[0]);
+        String file =null;
+
+        if(path.isAbsolute()){
+            file=path.toString();
+        } else{
+            file = path.toAbsolutePath().toString();
+        }
+
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
         Map<String, Integer> map = createMapWithWords(bufferedReader);
 
         bufferedReader.close();
