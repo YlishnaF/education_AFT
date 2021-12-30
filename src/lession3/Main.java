@@ -54,6 +54,8 @@ public class Main {
     }
 
     public static void useCurrency(List<Company> companies, String s){
+        System.out.printf("Валюту %s используют: ", s);
+        System.out.println();
 
         for (Company company : companies) {
             for (Securities security: company.getSecurities()) {
