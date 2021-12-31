@@ -5,7 +5,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.List;
+
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -16,13 +18,11 @@ public class Main {
         gsonBuilder.registerTypeAdapter(LocalDate.class, new LocalDateDeserializer());
         Gson gson = gsonBuilder.setPrettyPrinting().create();
         Companies object = gson.fromJson(fileReader, Companies.class);
-        
         List<Company> companies = object.getCompanies();
-        
         printNameAndFoundDate(companies);
         currencyOutOfDate(companies);
-        companiesFoundedAfter(companies, localDateCreator("23/12/1945"));
-        useCurrency(companies, "RUB");
+        companiesFoundedAfter(companies, localDateCreator("23/12/92"));
+        useCurrency(companies, "EU");
 
         fileReader.close();
 
@@ -58,10 +58,11 @@ public class Main {
         System.out.println();
 
         for (Company company : companies) {
+            System.out.println("id: "+ company.getId());
             for (Securities security: company.getSecurities()) {
                 for (String currency: security.getCurrency()) {
                     if(currency.equals(s)){
-                        System.out.println("id: "+ company.getId() +"; code: " + security.getCode());
+                        System.out.println("code: " + security.getCode());
                     }
                 }
 
@@ -85,10 +86,11 @@ public class Main {
             localDate=LocalDate.parse(s,dateTimeFormatter);
         } else if(s.matches("\\d{2}[/]\\d{2}[/]\\d{2}")) {
             dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yy");
-            localDate = LocalDate.parse(s, dateTimeFormatter);
+            localDate = LocalDate.parse(s, dateTimeFormatter).minusYears(100);
         } else {
             System.out.println("Дата некорректна!");
         }
         return localDate;
     }
 }
+
