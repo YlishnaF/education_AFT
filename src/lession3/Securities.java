@@ -2,7 +2,7 @@ import java.time.LocalDate;
 
 public class Securities {
     private String name;
-    private String[] currency;
+    private Currency[] currency;
     private String code;
     private LocalDate date;
 
@@ -18,11 +18,11 @@ public class Securities {
         this.name = name;
     }
 
-    public String[] getCurrency() {
+    public Currency[] getCurrency() {
         return currency;
     }
 
-    public void setCurrency(String[] currency) {
+    public void setCurrency(Currency[] currency) {
         this.currency = currency;
     }
 
